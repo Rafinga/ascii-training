@@ -17,8 +17,6 @@ public class Ascifier {
         }
         final String replacementMap = " .,:;ox%#@";
         final int sampleIndex =((255-intensity)*10)/256;
-
-        System.out.println(sampleIndex);
         return replacementMap.charAt(sampleIndex);
     }
 
@@ -29,20 +27,25 @@ public class Ascifier {
 
 
         final String path = "grayscale_output.jpg";
-        final Compresser compresser = new Compresser(path);
-        final String compressedPath = "resized_output.jpg";
-        compresser.compress((double) 1 /(1<<1), (double) 1 /(1<<2));
-        BufferedImage grayImage = ImageIO.read(new File(compressedPath));
+        BufferedImage grayImage = ImageIO.read(new File(path));
         int width = grayImage.getWidth();
         int height = grayImage.getHeight();
         // Loop through each pixel
         final List<Character> textList = new ArrayList<>();
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                final int intensity = grayImage.getRGB(x, y) &0xFF;
-                final char ascii = this.sampleCharacter(intensity);
-                textList.add(ascii);
+        final int charWidth = 100;
+        final int charHeight = 200;
+        final int horizontalCt = width/charWidth;
+        final int verticalCt = height/charHeight;
+        for (int y = 0; y < verticalCt; y++) {
+            for (int x = 0; x < horizontalCt; x++) {
+                final TextPix textPix = new TextPix(charHeight,charWidth,new ArrayList<>());
+                textPix.populate(grayImage,x,y);
+                textList.add(textPix.mapPix());
+//                System.out.printf( "selectedX:%d selectedY:%d\n",x,y );
             }
+
+
+
             textList.add('\n');
         }
 

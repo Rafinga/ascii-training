@@ -1,12 +1,16 @@
 package org.example;
 
+import lombok.AllArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-
+@AllArgsConstructor
 public class GrayScaler {
     public enum Color {
         RED,
@@ -14,11 +18,8 @@ public class GrayScaler {
         BLUE
     }
 
-
+@NonNull
     private final InputStream fileStream;
-    public GrayScaler(final InputStream fileStream){
-        this.fileStream = fileStream;
-    }
     private int extractRGB(int rgb,Color color){
         int lsb = 0xff;
         switch (color){
