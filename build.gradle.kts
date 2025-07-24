@@ -11,7 +11,11 @@ repositories {
 }
 
 dependencies {
+    // https://mvnrepository.com/artifact/org.bytedeco/javacv
+    implementation("org.bytedeco:javacv-platform:1.5.12")
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
+
+    implementation("org.bytedeco:opencv-platform:4.11.0-1.5.12")
     compileOnly("org.projectlombok:lombok:1.18.38")
     annotationProcessor("org.projectlombok:lombok:1.18.38")
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
