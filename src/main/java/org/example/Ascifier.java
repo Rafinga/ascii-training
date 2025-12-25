@@ -10,6 +10,12 @@ import java.util.stream.Collectors;
 
 public class Ascifier {
 
+    private final TextPix.CharacterSet charset;
+    
+    public Ascifier(TextPix.CharacterSet charset) {
+        this.charset = charset;
+    }
+
     public void ascify(final BufferedImage grayImage) throws IOException {
         int width = grayImage.getWidth();
         int height = grayImage.getHeight();
@@ -21,7 +27,7 @@ public class Ascifier {
         final int verticalCt = height/charHeight;
         for (int y = 0; y < verticalCt; y++) {
             for (int x = 0; x < horizontalCt; x++) {
-                final TextPix textPix = new TextPix(charHeight,charWidth,new ArrayList<>());
+                final TextPix textPix = new TextPix(charHeight,charWidth,new ArrayList<>(), charset);
                 textPix.populate(grayImage,x,y);
                 textList.add(textPix.mapPix());
             }
