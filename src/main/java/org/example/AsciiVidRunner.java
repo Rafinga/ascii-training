@@ -16,8 +16,8 @@ import java.awt.image.BufferedImage;
 public class AsciiVidRunner {
 
 
-  public static void run(final String vidName, final int speed, final TextPix.CharacterSet charset) throws Exception {
-    Ascifier ascifier = new Ascifier(charset);
+  public static void run(final String vidName, final int speed, final TextPix.CharacterSet charset, final int blockWidth, final int blockHeight) throws Exception {
+    Ascifier ascifier = new Ascifier(charset, blockWidth, blockHeight);
     FFmpegFrameGrabber grabber = new FFmpegFrameGrabber(vidName);
     Java2DFrameConverter converter = new Java2DFrameConverter();
 

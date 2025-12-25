@@ -12,16 +12,20 @@ import java.util.Arrays;
 public class Ascifier {
 
     private final TextPix.CharacterSet charset;
+    private final int blockWidth;
+    private final int blockHeight;
     
-    public Ascifier(TextPix.CharacterSet charset) {
+    public Ascifier(TextPix.CharacterSet charset, int blockWidth, int blockHeight) {
         this.charset = charset;
+        this.blockWidth = blockWidth;
+        this.blockHeight = blockHeight;
     }
 
     public void ascify(final BufferedImage grayImage) throws IOException {
         int width = grayImage.getWidth();
         int height = grayImage.getHeight();
-        final int charWidth = 4;
-        final int charHeight = 8;
+        final int charWidth = blockWidth;
+        final int charHeight = blockHeight;
         final int horizontalCt = width/charWidth;
         final int verticalCt = height/charHeight;
         

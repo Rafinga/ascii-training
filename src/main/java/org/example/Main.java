@@ -11,14 +11,17 @@ public class Main {
         System.out.println("Starting Main");
         
         if (args.length == 0) {
-            System.err.println("Usage: java Main <filename> [speed] [charset]");
+            System.err.println("Usage: java Main <filename> [speed] [charset] [blockWidth] [blockHeight]");
             System.err.println("Charset options: default, gradient, extended");
+            System.err.println("Block dimensions: width and height in pixels (default: 4, 8)");
             System.exit(1);
         }
         
         final String vidName = args[0];
         final int speed = args.length > 1 ? Integer.parseInt(args[1]) : 1;
         final String charsetName = args.length > 2 ? args[2].toLowerCase() : "default";
+        final int blockWidth = args.length > 3 ? Integer.parseInt(args[3]) : 4;
+        final int blockHeight = args.length > 4 ? Integer.parseInt(args[4]) : 8;
         
         TextPix.CharacterSet charset;
         switch (charsetName) {
@@ -32,7 +35,7 @@ public class Main {
         ).toString();
 
         System.out.println(vidPath);
-        AsciiVidRunner.run(vidPath, speed, charset);
+        AsciiVidRunner.run(vidPath, speed, charset, blockWidth, blockHeight);
 
 
 
