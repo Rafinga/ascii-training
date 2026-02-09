@@ -1,5 +1,9 @@
 package org.example;
 
+import lombok.AllArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -8,15 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@AllArgsConstructor
 public class Compresser {
-
-
-
+    @NonNull
     private final String path;
-    public Compresser(final String path) throws IOException {
-        this.path = path;
-    }
 
     public void compress(final double xScale, final double yScale) throws IOException {
         BufferedImage grayImage =  ImageIO.read(new File(this.path));

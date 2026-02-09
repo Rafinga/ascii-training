@@ -1,12 +1,16 @@
 package org.example;
 
+import lombok.AllArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-
+@AllArgsConstructor
 public class GrayScaler {
     public enum Color {
         RED,
@@ -14,11 +18,8 @@ public class GrayScaler {
         BLUE
     }
 
-
-    private final InputStream fileStream;
-    public GrayScaler(final InputStream fileStream){
-        this.fileStream = fileStream;
-    }
+@NonNull
+    private final BufferedImage colorImage;
     private int extractRGB(int rgb,Color color){
         int lsb = 0xff;
         switch (color){
@@ -47,8 +48,7 @@ public class GrayScaler {
         return (gray << 16) | (gray << 8) | gray;
 
     }
-    public void greyScale() throws IOException {
-        BufferedImage colorImage = ImageIO.read(this.fileStream);
+    public BufferedImage greyScale() throws IOException {
         int width = colorImage.getWidth();
         int height = colorImage.getHeight();
 
@@ -64,9 +64,11 @@ public class GrayScaler {
             }
         }
 
-        // Save output (optional)
-        File output = new File("grayscale_output.jpg");
-        ImageIO.write(grayImage, "jpg", output);
-        System.out.println("Saved grayscale image to: " + output.getAbsolutePath());
+
+//        // Save output (optional)
+//        File output = new File("grayscale_output.jpg");
+//        ImageIO.write(grayImage, "jpg", output);
+//        System.out.println("Saved grayscale image to: " + output.getAbsolutePath());
+        return grayImage;
     }
 }
